@@ -28,9 +28,10 @@ jobs:
             name=$(basename "$sch" .kicad_sch)
             kicad-cli sch erc --severity-error --exit-code-violations \
               --format report -o "out/$name-erc.rpt" "$sch" || status=1
+            kicad-cli sch erc --severity-all --format report -o "out/$name-erc-all.rpt" "$sch"
             kicad-cli sch export pdf -o "out/$name.pdf" "$sch"
           done
-          cat out/*-erc.rpt
+          cat out/*-erc-all.rpt
           exit $status
       - uses: actions/upload-artifact@v4
         if: always()
