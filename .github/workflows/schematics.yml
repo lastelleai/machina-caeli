@@ -1,0 +1,39 @@
+# Runs the official KiCad command-line tools on every change to the schematics:
+# electrical rules check (fails the run on any error) and PDF export.
+name: schematics
+
+on:
+  push:
+    paths: ["hardware/schematic/**", ".github/workflows/schematics.yml"]
+  pull_request:
+    paths: ["hardware/schematic/**", ".github/workflows/schematics.yml"]
+  workflow_dispatch:
+
+jobs:
+  kicad:
+    runs-on: ubuntu-latest
+    container:
+      image: kicad/kicad:9.0
+      options: --user root
+    steps:
+      - uses: actions/checkout@v4
+      - name: ERC and PDF export
+        shell: bash
+        run: |
+          set -euo pipefail
+          export HOME=/root
+          mkdir -p out
+          status=0
+          for sch in hardware/schematic/*/*.kicad_sch; do
+            name=$(basename "$sch" .kicad_sch)
+            kicad-cli sch erc --severity-error --exit-code-violations \
+              --format report -o "out/$name-erc.rpt" "$sch" || status=1
+            kicad-cli sch export pdf -o "out/$name.pdf" "$sch"
+          done
+          cat out/*-erc.rpt
+          exit $status
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: schematics
+          path: out/

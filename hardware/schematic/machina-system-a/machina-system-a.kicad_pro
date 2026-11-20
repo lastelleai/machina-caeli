@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "filename": "machina-system-a.kicad_pro",
+    "version": 3
+  },
+  "schematic": {
+    "legacy_lib_dir": "",
+    "legacy_lib_list": []
+  },
+  "boards": [],
+  "libraries": {
+    "pinned_footprint_libs": [],
+    "pinned_symbol_libs": []
+  },
+  "sheets": [
+    [
+      "047acc20-0189-570b-9af0-fddb0fa5f5ce",
+      "Root"
+    ]
+  ],
+  "text_variables": {}
+}

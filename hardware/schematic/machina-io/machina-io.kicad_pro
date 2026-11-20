@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "filename": "machina-io.kicad_pro",
+    "version": 3
+  },
+  "schematic": {
+    "legacy_lib_dir": "",
+    "legacy_lib_list": []
+  },
+  "boards": [],
+  "libraries": {
+    "pinned_footprint_libs": [],
+    "pinned_symbol_libs": []
+  },
+  "sheets": [
+    [
+      "87f60215-d14f-55d8-b958-a01007cc41ca",
+      "Root"
+    ]
+  ],
+  "text_variables": {}
+}
